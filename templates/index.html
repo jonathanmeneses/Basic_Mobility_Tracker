@@ -1,3 +1,4 @@
+{% from "bootstrap5/form.html" import render_form %}
 {% include "header.html" %}
 
 <!-- Page Header-->
@@ -9,55 +10,47 @@
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <div class="site-heading">
-          <h1>Angela's Blog</h1>
-          <span class="subheading">A collection of random musings.</span>
+          <h1>Greyskull LP Workout Planner</h1>
+          <span class="subheading">Track your lifts with me!.</span>
         </div>
       </div>
     </div>
   </div>
 </header>
 <!-- Main Content-->
-<div class="container px-4 px-lg-5">
-  <div class="row gx-4 gx-lg-5 justify-content-center">
-    <div class="col-md-10 col-lg-8 col-xl-7">
-      <!-- Post preview-->
-      {% for post in all_posts %}
-      <div class="post-preview">
-        <a href="{{ url_for('show_post', post_id=post.id) }}">
-          <h2 class="post-title">{{ post.title }}</h2>
-          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-        </a>
-        <p class="post-meta">
-          Posted by
-          <a href="#">{{post.post_author.name}}</a>
-          on {{post.date}}
-          <!-- TODO: Only show delete button if user id is 1 (admin user) -->
-          {% if current_user.id == 1 %}
-          <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
-          {% endif %}
-        </p>
-      </div>
-      <!-- Divider-->
-      <hr class="my-4" />
-      {% endfor %}
 
-      <!-- New Post -->
-      <!-- TODO: Only show Create Post button if user id is 1 (admin user) -->
-      {% if current_user.id == 1 %}
-      <div class="d-flex justify-content-end mb-4">
-        <a
-          class="btn btn-primary float-right"
-          href="{{url_for('add_new_post')}}"
-          >Create New Post</a
-        >
-      </div>
-      {% endif %}
-      <!-- Pager-->
-      <div class="d-flex justify-content-end mb-4">
-        <a class="btn btn-secondary text-uppercase" href="#!">Older Posts →</a>
-      </div>
-    </div>
-  </div>
+<div class = "container .mx-auto col-sm-6 col-lg-3">
+<form class = "lift">
+<ul class=" list-group ">
+  <h3>Deadlift</h3>
+  <li class="list-group-item">Warmup Set: 135 x 5 </li>
+  <li class="list-group-item">Warmup Set: 165 x 3</li>
+  <li class="list-group-item">Warmup Set: 185 x 2</li>
+  <li class="list-group-item">Working Set: 225 x 5</li>
+  <li class="list-group-item">Working Set: 225 x 5</li>
+  <li class="list-group-item">Working Set: 225 x 5+</li>
+   <label for="weight">Weight</label> <input type="number" id="weight">
+  <label for="reps">Final Set Reps</label> <input type="number" id="reps">
+  <br>
+  <button type="submit" class="btn btn-primary">Log Lift</button>
+</ul>
+</form>
 </div>
+
+<ul class="list-group col-sm-3 ">
+  <h3>Deadlift</h3>
+  <li class="list-group-item">Warmup Set: 135 x 5 </li>
+  <li class="list-group-item">Warmup Set: 165 x 3</li>
+  <li class="list-group-item">Warmup Set: 185 x 2</li>
+  <li class="list-group-item">Working Set: 225 x 5+</li>
+  {{render_form(form, button_map={"submit": "primary"}) }}
+
+</ul>
+<div>
+<button type="button" class="btn btn-primary">Skip Lift</button>
+</div>
+
+
+
 
 {% include "footer.html" %}

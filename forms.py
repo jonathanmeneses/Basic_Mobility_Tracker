@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, EmailField
+from wtforms import StringField, SubmitField, PasswordField, EmailField, IntegerField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditorField
 
@@ -35,3 +35,10 @@ class LoginForm(FlaskForm):
 class CommentForm(FlaskForm):
     comment = CKEditorField('Comment', validators=[DataRequired()])
     submit = SubmitField('Submit Comment')
+
+# TODO: Create an input form for the weight and reps that you did
+
+class LiftForm(FlaskForm):
+    weight = IntegerField('Weight', validators=[DataRequired()])
+    reps = IntegerField('Reps', validators=[DataRequired()])
+    submit = SubmitField('Log Lift')

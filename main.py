@@ -9,7 +9,7 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 # Import your forms from the forms.py
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, LiftForm
 
 
 '''
@@ -184,9 +184,12 @@ def logout():
 
 @app.route('/')
 def get_all_posts():
+
+    form = LiftForm()
+
     result = db.session.execute(db.select(BlogPost))
     posts = result.scalars().all()
-    return render_template("index.html", all_posts=posts)
+    return render_template("index.html", all_posts=posts, form = form)
 
 
 # TODO: Allow logged-in users to comment on posts
